@@ -1,0 +1,6 @@
+<% if @post.valid? %>
+$("#post-list").prepend("<%=j render :partial => "post", :locals => { :post => @post } %>");
+$("#post_content").val("");
+<% else %>
+  alert("贴文失败");
+<% end %>

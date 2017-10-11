@@ -1,0 +1,16 @@
+<p>
+  <a id="my-toggle-click">Toggle</a>
+</p>
+
+<div id="foo" style="border: 1px solid red;">
+  <p>bar</p>
+</div>
+
+<script>
+  $("#foo").hide();   // 先马上藏起来
+
+  $("#my-toggle-click").hover(function(){
+    $("#foo").fadeToggle();   // 移过去会有开关的效果
+  })
+
+</script>
