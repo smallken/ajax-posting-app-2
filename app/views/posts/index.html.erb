@@ -12,3 +12,47 @@
   <%= render :partial => "post", :locals => { :post => post } %>
       <% end %>
 </div>
+
+<!-- <script>
+// 这会绑 click 事件到所有有 `.delete-post` class 的元素上，也就是所有的删除按钮
+    $(".delete-post").click(function(evt){
+      // `evt` 是浏览器的事件物件，evt.preventDefault(); 会终止这个元素的默认行为：
+      // 超连结 a 的默认行为是跳到下一页，如果没有这行的话，送出 ajax 后会跳去 show page
+      evt.preventDefault();
+      // this 是个特别的变量，代表触发事件的元素。使用 attr 可以读取元素的属性，这里要拿到超连结的网址
+      var url = $(this).attr("href");
+
+      // 送出 Ajax
+      $.ajax({
+        url: url,
+        method: 'DELETE',
+        dataType: 'json', // 要求服务器回传 json
+         success: function(data){   // data 就是服务器回传的 JSON 资料
+           $("#post-" + data["id"]).remove();
+         }
+      })
+    })
+</script> -->
+
+
+<script>
+  // 记下目前画面最小的贴文 ID
+  var current_post_id = <%= @posts.last.id %>;
+
+  // 当捲轴动的时候，会触发这个事件
+  $(window).scroll(function(){
+    // 当捲到最下面的时候
+    if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+      var url = "/posts?max_id=" + current_post_id;
+      if (url) {
+        $.ajax({
+          method: "GET",
+          url: url,
+          dataType: "script"
+        })
+      } else {
+        console.log("data ended")
+      }
+    }
+  })
+  </script>
