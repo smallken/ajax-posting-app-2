@@ -56,3 +56,23 @@
     }
   })
   </script>
+
+
+  <script>
+  $(".toggle-flag").on('change', function(){
+    var url = $(this).data("url");
+
+    $.ajax({
+      url: url,
+      method: "POST",
+      dataType: "json",
+      success: function(data){
+        if ( data["flag_at"] ) {
+          $("#post-flag-" + data["id"]).html(data["flag_at"]);
+        } else {
+          $("#post-flag-" + data["id"]).html("");
+        }
+      }
+    });
+  });
+</script>

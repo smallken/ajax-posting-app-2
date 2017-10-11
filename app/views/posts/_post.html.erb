@@ -22,4 +22,15 @@
     <% end %>
    </div>
  </div>
+
+ <div class="panel-footer">
+    <% if current_user && current_user.is_admin? %>
+      <label>
+      <%= check_box_tag "mark_flag[#{post.id}]", 1, post.flag_at.present?,
+            :data => { :url => toggle_flag_post_path(post) }, :class => "toggle-flag" %> 标记为垃圾
+        <span id="post-flag-<%= post.id %>"><%= post.flag_at %></span>
+      </label>
+    <% end %>
+  </div>
+
 </div>
